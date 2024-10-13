@@ -1,0 +1,24 @@
+how to write the fixture method in test case file
+in the test files
+
+@pytest.fixture
+def setup_and_teardown():
+    global driver
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    url = "https://tutorialsninja.com/demo/"
+    driver.get(url)
+    time.sleep(2)
+    yield
+    driver.quit()
+
+def test_case(setup_and_teardown):
+    test step 1
+    test step 2
+    .
+
+
+If you need to test only one test function, run the code 'pytest {test_file} -k {function_name without 'def'}'
+If you need to get any print or output, run the code 'pytest {test_file} -ra'
+for pytest, file name should be start with 'test_', and the test function should be start with 'test_', otherwise the no test will run
+
