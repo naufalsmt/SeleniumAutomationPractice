@@ -9,7 +9,10 @@ from Utilities import ExcelUtils
 class TestLogin(BaseTest):
     # passing the excell file data to the login fields
     @pytest.mark.parametrize("email_address, password",
-                             ExcelUtils.get_data_from_excel('ExcelFiles/loginfile.xlsx', 'LoginPage'))
+                             ExcelUtils.get_data_from_excel(
+                                 'ExcelFiles/loginfile.xlsx',
+                                 'LoginPage')
+                             )
     def test_login_by_valid_credential(self, email_address, password):
         login_page = LoginPage(self.driver)
         login_page.navigate_to_login_page()
