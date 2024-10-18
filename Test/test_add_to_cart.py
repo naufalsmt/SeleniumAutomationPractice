@@ -1,7 +1,9 @@
 import time
+import unittest
 from Pages.addToCartPage import AddToCart
 from Pages.loginPage import LoginPage
 from Pages.checkoutPage import Checkout
+from Pages.responseMessage import ResponseMessage
 from Test.base_test import BaseTest
 from Utilities import ExcelLoginData
 
@@ -37,6 +39,7 @@ class TestCartProduct(BaseTest):
         lp = LoginPage(self.driver)
         ac = AddToCart(self.driver)
         ch = Checkout(self.driver)
+        rm = ResponseMessage(self.driver)
         lp.navigate_to_login_page()
         lp.login_to_application(email, password)
         time.sleep(2)
@@ -44,6 +47,8 @@ class TestCartProduct(BaseTest):
 
         ch.click_checkout_link()
         time.sleep(2)
+        checkout_product_name = ch.return_checkout_product_name()
+        # product_status_response = rm.return_checkout_product_status_response()
         checkout_title = ch.checkout_page_title()
         assert checkout_title.is_displayed()
 
@@ -67,6 +72,12 @@ class TestCartProduct(BaseTest):
         time.sleep(2)
         checkout_shipping = ch.return_checkout_shipping_price()
         assert checkout_shipping not in popup_shipping, f"{checkout_shipping} is not found in {popup_shipping}"
+
+        ch.click_checkout_btn()
+        time.sleep(2)
+        assert '***' in checkout_product_name, \
+            "Products marked with *** are not available in the desired quantity or not in stock!"
+
 
 
 

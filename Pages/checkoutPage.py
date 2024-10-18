@@ -18,6 +18,8 @@ class Checkout:
     apply_shipping_btn_id = 'button-shipping'
     checkout_shipping_price_xpath = '//*[@id="content"]/div[2]/div/table/tbody/tr[2]/td[2]'
     table_section_xpath = '//*[@id="content"]/h2'
+    checkout_btn_xpath = '//*[@id="content"]/div[3]/div[2]/a'
+    checkout_product_name_xpath = '//*[@id="content"]/form/div/table/tbody/tr/td[2]'
 
     # checkout function calls
 
@@ -65,6 +67,12 @@ class Checkout:
 
     def return_checkout_shipping_price(self):
         return self.driver.find_element(By.XPATH, self.checkout_shipping_price_xpath).text
+
+    def return_checkout_product_name(self):
+        return self.driver.find_element(By.XPATH, self.checkout_product_name_xpath).text
+
+    def click_checkout_btn(self):
+        self.driver.find_element(By.XPATH, self.checkout_btn_xpath).click()
 
 
 

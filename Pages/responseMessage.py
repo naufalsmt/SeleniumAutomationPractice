@@ -12,6 +12,7 @@ class ResponseMessage:
     f_name_validation_message_xpath = '//*[@id="account"]/div[2]/div/div'
     email_exist_warning_xpath = '//*[@id="account-register"]/div[1]'
     apply_shipping_response_xpath = '//*[@id="checkout-cart"]/div[1]'
+    checkout_product_status_xpath = '//*[@id="checkout-cart"]/div[1]'
 
     def no_product_search_message(self):
         self.driver.find_element(By.XPATH, self.no_product_search_message_xpath)
@@ -33,3 +34,6 @@ class ResponseMessage:
 
     def return_apply_shipping_method_response(self):
         return self.driver.find_element(By.XPATH, self.apply_shipping_response_xpath).text
+
+    def return_checkout_product_status_response(self):
+        return self.driver.find_element(By.XPATH, self.checkout_product_status_xpath).text
